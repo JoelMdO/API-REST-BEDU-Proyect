@@ -1,9 +1,10 @@
 //create a user in database
 const User = require("../models/user");
 
-exports.createNewUser = function (newUser) {
+exports.createNewUser = async function (newUser) {
     console.log(newUser);
-    return User.create(newUser);
+    const createdUser = await User.create(newUser);
+    return createdUser;
 };
 
 exports.findByUsername = async function (username) {

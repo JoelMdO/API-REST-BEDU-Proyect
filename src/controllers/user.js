@@ -1,4 +1,4 @@
-const { userService, findByUsername } = require("../services/user");
+const userService = require("../services/user");
 const jwt = require("jsonwebtoken");
 
 exports.getUser = async function (request, response) {
@@ -20,14 +20,17 @@ exports.getUser = async function (request, response) {
 
 exports.createUser = async function (request, response) {
     const { username, email, password } = request.body;
-    console.log(username, email, password);
+    console.log(`create:${username}, ${email}, ${password}`);
     if (!username || !email || !password) {
         response.status(400).json({ message: 'Please review the 3 fields are inserted correctly' });
     } else {
         try {
+            console.log(`beforesend: ${username}, ${email}, ${password}`);
             const newUser = await userService.createNewUser({ username, email, password });
+            console.log(`createUSer: ${newUser}`);
             response.status(201).json({ message: 'Succesfully Created', newUser });
         } catch (e) {
+            console.error(e);
             response.status(500).json({ message: 'Failed to create user', e });
         }
     }
