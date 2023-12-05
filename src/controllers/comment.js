@@ -10,17 +10,17 @@ exports.getComments = async function (request, response) {
 exports.createComments = async function (request, response) {
     const { content } = request.body;
     const { icao } = request.params;
-    console.log(icao, content);
+
     if (!content) {
         response.status(400).json({ message: 'Please write a comment' });
     } else {
         try {
-            console.log(`createComments: ${content}, ${request.user.User_id}, ${icao}`);
+
             const userid = request.user.User_id;
             const airportid = await airportServices.findAirportID(icao);
-            console.log(`airportidatcommentcontroller: ${airportid}`);
+
             const newComment = await commentServices.insertComments({ content, User_id: userid, Airport_id: airportid });
-            console.log(newComment);
+
             response.status(201).json({ message: 'Succesfully Created', newComment });
         } catch (e) {
             response.status(500).json({ message: 'Failed to create Comment', e });

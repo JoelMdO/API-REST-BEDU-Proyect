@@ -3,7 +3,7 @@ const airportServices = require('../services/airports');
 exports.loadAirportsbyICAO = async function (request, response) {
     try {
         const { icao } = request.params;
-        console.log(icao);
+        console.log(`icao`, icao);
         if (icao) {
             const token = request.headers.authorization;
             if (token) {
@@ -19,7 +19,7 @@ exports.loadAirportsbyICAO = async function (request, response) {
             })
         }
     } catch (e) {
-        console.error(e);
+
         response.status(500).json({
             message: 'Server error',
             messagedev: e.details,

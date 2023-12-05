@@ -13,10 +13,10 @@ exports.sequelize = sequelize;
 exports.connect = async function () {
     try {
         await sequelize.authenticate();
-        console.log("Connection to database succeed");
+
     } catch (e) {
-        console.error("Unable to connect to the database");
-        console.error(e);
+
+
     }
 };
 
@@ -24,9 +24,9 @@ exports.connect = async function () {
 exports.update = async function () {
     try {
         await sequelize.sync({ force: false });
-        console.log("Database Updated");
+
     } catch (e) {
-        console.error("Unable to update the databas");
-        console.error(e);
+
+
     }
 };

@@ -8,17 +8,17 @@ passport.use(
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     },
         async function (payload, done) {
-            console.log(`Passport Payload: ${payload}`);
+
             try {
                 const user = await findByID(payload.User_id);
-                console.log(`Passport user: ${user}`);
+
                 if (!user) {
                     return done(null, false, {
                         message: 'User not found',
                     }), false
                 };
                 done(null, user);
-                console.log(`Passport user after done: ${user}`);
+
             } catch (e) {
                 return done(e, false);
             }

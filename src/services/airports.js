@@ -11,7 +11,7 @@ exports.findICAOWithoutLogin = async function (icao) {
         });
         return queryResult;
     } catch (e) {
-        console.log('Error in services', e);
+
         throw e;
     }
 }
@@ -26,12 +26,12 @@ exports.findICAOWithLogin = async function (icao) {
 }
 
 exports.findAirportID = async function (icao) {
-    console.log(`findAirportID ${icao}`);
+
     const queryText = 'SELECT Airport_id FROM airports as Airports WHERE Airports.icao =:icao;';
     const airport = await sequelize.query(queryText, {
         replacements: { icao },
         type: Sequelize.QueryTypes.SELECT,
     });
-    console.log(`findAirportID ${airport.Airport_id}`);
+
     return airport.Airport_id;
 }
